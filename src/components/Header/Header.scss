@@ -1,0 +1,19 @@
+.header {
+    h2 {
+        font-weight: 700;
+        font-size: 28px;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 700;
+        font-size: 24px;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.container {
+  margin: 0 174px 0 166px;
+}
+
+.charactersBlock {
+  margin-top: 45px;
+}
+
+.charactersBlock__content {
+  display: grid;
+  grid-template-columns: auto auto;
+
+}

@@ -1,0 +1,21 @@
+.characters {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 318px 318px 318px;
+    grid-gap: 25px;
+
+    &__item {
+        background: #232222;
+
+        img {
+            width: 200px;
+        }
+
+        &__name {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 15px 0 0 15px;
+            color: white;
+        }
+    }
+}
