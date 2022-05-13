@@ -12,8 +12,6 @@ const NotSelected = () => {
                 <div className='notSelected__figures__block'></div>
                 <div className='notSelected__figures__block'></div>
                 <div className='notSelected__figures__block'></div>
-
-
             </div>
         </div>
     )
