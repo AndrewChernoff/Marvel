@@ -22,6 +22,7 @@ class RandomCharacter extends React.Component {
                                     <button style={{
                                         width: '101px',
                                         height: '38px',
+                                        color: 'white',
                                         background: '#9F0013',
                                         border: 'none',
                                         clipPath: 'polygon(20% -2%, 125% 0px, 80% 100%, -20% 100%)'
@@ -30,6 +31,7 @@ class RandomCharacter extends React.Component {
                                     <button style={{
                                         width: '101px',
                                         height: '38px',
+                                        color: 'white',
                                         background: '#5C5C5C',
                                         border: 'none',
                                         clipPath: 'polygon(20% -2%, 125% 0px, 80% 100%, -20% 100%)'
@@ -46,12 +48,12 @@ class RandomCharacter extends React.Component {
                                 <button style={{
                                     width: '101px',
                                     height: '38px',
+                                    color: 'white',
                                     background: '#9F0013',
                                     border: 'none',
                                     clipPath: 'polygon(20% -2%, 125% 0px, 80% 100%, -20% 100%)'
                                 }}>TRY IT</button>
                                 <img className='random__info__content__img' src={tools} alt='tools' />
-
                             </div>
 
                         </div>

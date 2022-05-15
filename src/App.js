@@ -1,5 +1,4 @@
-import './App.css';
-///import CharacterItem from './components/CharacterItem/CharacterItem';
+import './App.scss';
 import Characters from './components/Characters/Characters';
 import Header from './components/Header/Header';
 import RandomCharacter from './components/Thor/Thor';
@@ -98,6 +97,7 @@ class App extends React.Component {
               <Characters characters={this.state.characters} getSelectedItem={this.getSelectedItem} />
               {!this.state.selectedItem ? <NotSelected /> : <CharacterItem item={item} />}
             </div>
+            <button>LOAD MORE</button>
           </div>
         </div>
       </>
