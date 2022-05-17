@@ -1,7 +1,7 @@
 import './App.scss';
 import Characters from './components/Characters/Characters';
 import Header from './components/Header/Header';
-import RandomCharacter from './components/Thor/Thor';
+import RandomCharacter from './components/RandomChar/RandomChar';
 import img from '../src/resourses/img/thor.png';
 import CharacterItem from './components/CharacterItem/CharacterItem';
 import React from 'react';
