@@ -2,8 +2,6 @@ const _baseURL = 'https://gateway.marvel.com:443/v1/public/characters';
 const _apiKey = 'limit=9&offset=500&apikey=34f1a3219ea2ae0e4d07e8edc8e23bf5';
 
 class MarvelAPI {
-
-
     getResourse = async (url) => {
         let res = await fetch(url);
         if (!res.ok) {
