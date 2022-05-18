@@ -1,29 +1,27 @@
 import React from 'react';
 import MarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
-
 import tools from '../../resourses/img/tools.png'
 import Error from '../Common/Error/Error';
 import Loading from '../Common/Loading/Loading';
 import './RandomChar.scss';
 
 class RandomCharacter extends React.Component {
-    constructor() {
-        super();
-        this.getRandomChar();
+    state = {
+        character: null,
+        loading: true,
+        error: false
+    }
 
-        this.state = {
-            character: null,
-            loading: true,
-            error: false
-        }
+    componentDidMount() {
+        console.log('did mount')
+        this.getRandomChar();
     }
 
     getRandomChar = () => {
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
         new MarvelAPI().getCharacter(randomID)
-            .then(res => {
-                console.log(res)
-                this.setState(res);
+            .then(character => {
+                this.setState({ character });
                 this.setState({ loading: false })
 
             }).catch(
@@ -44,7 +42,7 @@ class RandomCharacter extends React.Component {
                     <div className='container__content'>
                         <div className='random__character__content'>
                             {this.state.loading ? <Loading /> : null}
-                            {!this.state.loading && !this.state.error ? <View state={this.state} /> : null}
+                            {!this.state.loading && !this.state.error ? <View state={this.state.character} /> : null}
                             {this.state.error ? <Error /> : null}
                         </div>
                         <div className='random__info'>
@@ -58,7 +56,6 @@ class RandomCharacter extends React.Component {
                                 }}>TRY IT</a>
                                 <img className='random__info__content__img' src={tools} alt='tool' />
                             </div>
-
                         </div>
                     </div>
                 </div>
