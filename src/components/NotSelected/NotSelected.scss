@@ -1,5 +1,15 @@
 $base-color: #C4C4C4;
 
+@keyframes skeleton-anim {
+    0% {
+        opacity: 0.3
+    }
+
+    100% {
+        opacity: 0.8
+    }
+}
+
 .notSelected {
     padding: 25px;
     width: 425px;
@@ -13,6 +23,8 @@ $base-color: #C4C4C4;
     }
 
     &__figures {
+        animation: skeleton-anim 0.8s infinite alternate;
+
         &__info {
             display: flex;
             justify-content: space-around;

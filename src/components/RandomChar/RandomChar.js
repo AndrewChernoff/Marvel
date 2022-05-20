@@ -7,23 +7,21 @@ import './RandomChar.scss';
 
 class RandomCharacter extends React.Component {
     state = {
-        character: null,
         loading: true,
         error: false
     }
 
     componentDidMount() {
-        console.log('did mount')
         this.getRandomChar();
     }
 
     getRandomChar = () => {
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
+        this.setState({ loading: true })
         new MarvelAPI().getCharacter(randomID)
             .then(character => {
                 this.setState({ character });
-                this.setState({ loading: false })
-
+                this.setState({ loading: false });
             }).catch(
                 () => {
                     this.setState({
@@ -35,7 +33,6 @@ class RandomCharacter extends React.Component {
     }
 
     render() {
-
         return (
             <div className='random__character'>
                 <div className='container'>
@@ -51,7 +48,7 @@ class RandomCharacter extends React.Component {
                                     <br></br>
                                     Do you want to get to know him better?</p>
                                 <p>Or choose another one</p>
-                                <a href='#' style={{
+                                <a onClick={this.getRandomChar} href='#' style={{
                                     background: '#9F0013',
                                 }}>TRY IT</a>
                                 <img className='random__info__content__img' src={tools} alt='tool' />

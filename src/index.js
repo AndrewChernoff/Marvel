@@ -3,12 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MarvelAPI from './DAL/MarvelAPI/MarvelAPI';
-
-const marvelAPI = new MarvelAPI();
-
-marvelAPI.getAllCharcters().then(response => console.log(response))
-/*marvelAPI.getCharacter(1009334).then(response => console.log(response)) */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -8,7 +8,10 @@
         background: #232222;
 
         img {
-            width: 200px;
+            max-width: 200px;
+            height: 190px;
+            display: block;
+            margin: 0 auto;
         }
 
         &__name {
