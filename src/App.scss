@@ -22,10 +22,8 @@
 }
 
 .charactersBlock__content {
-  /* display: grid;
-  grid-template-columns: auto auto;
- */
   display: grid;
   grid-template-columns: 650px 425px;
   grid-gap: 50px;
+  align-items: self-start;
 }

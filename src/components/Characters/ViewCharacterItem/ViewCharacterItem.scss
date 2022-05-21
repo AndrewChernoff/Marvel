@@ -1,0 +1,49 @@
+.character {
+    padding: 25px;
+    //min-height: 250px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+    &__restInfo {
+        font-size: 14px;
+    }
+
+    &__comics {
+        font-size: 18px;
+        font-weight: 700;
+
+        &-items__bar {
+            padding: 4px 0 4px 0;
+            width: 375px;
+            min-height: 25px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    &__shortInfo {
+        display: grid;
+        grid-template-columns: 105px auto;
+        grid-template-rows: 150px;
+        grid-gap: 65px;
+        align-items: center;
+
+        &__management {
+            h2 {
+                font-size: 22px;
+            }
+
+            &__btns {
+                display: grid;
+                grid-template-rows: 40px 40px;
+                grid-gap: 12px;
+            }
+        }
+    }
+
+    img {
+        max-width: 150px;
+        height: 150px;
+    }
+}
+
+/// box shadow not for column but for element's container 

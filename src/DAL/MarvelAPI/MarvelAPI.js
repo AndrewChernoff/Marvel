@@ -27,7 +27,8 @@ class MarvelAPI {
             description: response.data.results[0].description,
             modified: response.data.results[0].modified,
             thumbnail: response.data.results[0].thumbnail.path + '.' + response.data.results[0].thumbnail.extension,
-            wiki: response.data.results[0].urls[1].url
+            wiki: response.data.results[0].urls[1].url,
+            comics: response.data.results[0].comics
         }
     }
 }

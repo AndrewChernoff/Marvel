@@ -1,9 +1,12 @@
 import React from 'react';
 import MarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import tools from '../../resourses/img/tools.png'
+import Buttons from '../Common/WikiButton/WikiButton';
 import Error from '../Common/Error/Error';
 import Loading from '../Common/Loading/Loading';
 import './RandomChar.scss';
+import WikiButton from '../Common/WikiButton/WikiButton';
+import HomePageBtn from '../Common/HomePageBtn/HomePageBtn';
 
 class RandomCharacter extends React.Component {
     state = {
@@ -82,13 +85,15 @@ const View = ({ state }) => {
             <p>{description}</p>
 
             <div className='random__character__content__descr__btns'>
-                <a href='#' style={{
+                {/* <a href='#' style={{
                     background: '#9F0013'
-                }}><span>HOMEPAGE</span></a>
-
-                <a href={wiki} style={{
+                }}><span>HOMEPAGE</span></a> */}
+                <HomePageBtn />
+                <WikiButton wiki={wiki} />
+                {/* <a href={wiki} style={{
                     background: 'grey'
-                }}><span>WIKI</span></a>
+                }}><span>WIKI</span></a> */}
+                {/* <Buttons wiki={wiki} /> */}
             </div>
         </div>
     </>

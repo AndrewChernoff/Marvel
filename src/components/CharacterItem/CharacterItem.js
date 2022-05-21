@@ -1,6 +1,7 @@
 import React from "react";
 import MarvelAPI from "../../DAL/MarvelAPI/MarvelAPI";
 import '../CharacterItem/CharacterItem.scss';
+import ViewCharacterItem from "../Characters/ViewCharacterItem/ViewCharacterItem";
 import Error from "../Common/Error/Error";
 import Loading from "../Common/Loading/Loading";
 
@@ -42,17 +43,12 @@ class CharacterItem extends React.Component {
         return (<>
             {this.state.loading ? <Loading /> : null}
             {this.state.error ? <Error /> : null}
-            {!this.state.loading && !this.state.error ? <div className='character'>
-                hero:{this.state.character.name}
-                <br></br>
-                descr:{this.state.character.description}
-                <br></br>
-                id:{this.state.character.id}
-            </div>
-                : null}
+            {!this.state.loading && !this.state.error ? <ViewCharacterItem state={this.state} /> : null}
         </>
         )
     }
-} //string 45 refactor later
+}
+
+
 
 export default CharacterItem;
