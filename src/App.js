@@ -5,6 +5,7 @@ import RandomCharacter from './components/RandomChar/RandomChar';
 import CharacterItem from './components/CharacterItem/CharacterItem';
 import React from 'react';
 import NotSelected from './components/NotSelected/NotSelected';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary ';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,21 +21,11 @@ class App extends React.Component {
     })
   }
 
-  /* selectedItem = () => {
-    if (!this.state.selectedItem) {
-      return;
-    }
-    else {
-      return this.state.characters.filter(item => item.id === this.state.selectedItem);
-    }
-  } */
-
   getCharacters = (chars) => {
     this.setState({ characters: chars })
   }
 
   render() {
-    //let item = this.selectedItem()
     return (
       <>
         <Header />
@@ -42,8 +33,13 @@ class App extends React.Component {
         <div className='charactersBlock'>
           <div className='container'>
             <div className='charactersBlock__content'>
-              <Characters getCharacters={this.getCharacters} getSelectedItem={this.getSelectedItem} />
-              {!this.state.selectedItem ? <NotSelected /> : <CharacterItem selectedId={this.state.selectedItem} />}{/* ///////////////// */}
+              <ErrorBoundary>
+                <Characters getCharacters={this.getCharacters} getSelectedItem={this.getSelectedItem} />
+              </ErrorBoundary>
+              {!this.state.selectedItem ? <NotSelected /> :
+                <ErrorBoundary>
+                  <CharacterItem selectedId={this.state.selectedItem} />
+                </ErrorBoundary>}
             </div>
             <button>LOAD MORE</button>
           </div>

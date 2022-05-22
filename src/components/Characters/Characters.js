@@ -26,7 +26,6 @@ class Characters extends React.Component {
                     loading: false,
                     error: true
                 }))
-
     }
 
     componentDidMount() {
