@@ -39,7 +39,7 @@ class Characters extends React.Component {
 
         console.log(this.state.offset)
 
-        new MarvelAPI().getAllCharcters(this.state.offset)/// here we get 500 but have to get 509
+        new MarvelAPI().getAllCharcters(this.state.offset)
             .then(res => {
                 this.setState({
                     loading: false,

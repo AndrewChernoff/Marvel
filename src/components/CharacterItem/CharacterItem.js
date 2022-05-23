@@ -4,6 +4,7 @@ import '../CharacterItem/CharacterItem.scss';
 import ViewCharacterItem from "../Characters/ViewCharacterItem/ViewCharacterItem";
 import Error from "../Common/Error/Error";
 import Loading from "../Common/Loading/Loading";
+import PropTypes from 'prop-types';
 
 class CharacterItem extends React.Component {
     constructor(props) {
@@ -49,6 +50,8 @@ class CharacterItem extends React.Component {
     }
 }
 
-
+CharacterItem.propTypes = {
+    selectedId: PropTypes.number
+};
 
 export default CharacterItem;

@@ -36,7 +36,6 @@ class App extends React.Component {
                   <CharacterItem selectedId={this.state.selectedItem} />
                 </ErrorBoundary>}
             </div>
-            {/* <button>LOAD MORE</button>*/}
           </div>
         </div>
       </>
