@@ -3,7 +3,7 @@ import './WikiButton.scss'
 const WikiButton = ({ wiki }) => {
     return (
         <>
-            <a href={wiki} style={{
+            <a className='wiki__btn' href={wiki} style={{
                 background: 'grey'
             }}><span>WIKI</span></a>
         </>

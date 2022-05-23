@@ -10,7 +10,9 @@ class Characters extends React.Component {
         this.state = {
             characters: [],
             loading: true,
-            error: false
+            error: false,
+            offset: 509,
+            newCharsPortion: false
         }
     }
 
@@ -18,9 +20,10 @@ class Characters extends React.Component {
         this.setState({ loading: true });
         new MarvelAPI().getAllCharcters()
             .then(res => {
-                this.setState({ characters: res.data.results });
-                this.props.getCharacters(res.data.results);
-                this.setState({ loading: false });
+                this.setState({
+                    characters: res.data.results,
+                    loading: false
+                });
             }).catch(() =>
                 this.setState({
                     loading: false,
@@ -28,10 +31,33 @@ class Characters extends React.Component {
                 }))
     }
 
+    onLoadMoreBtn = () => {
+        this.setState({
+            newCharsPortion: true,
+            offset: this.state.offset + 9
+        })
+
+        console.log(this.state.offset)
+
+        new MarvelAPI().getAllCharcters(this.state.offset)/// here we get 500 but have to get 509
+            .then(res => {
+                this.setState({
+                    loading: false,
+                    characters: [...this.state.characters, ...res.data.results],
+                    newCharsPortion: false
+                });
+            })
+            .catch(() =>
+                this.setState({
+                    loading: false,
+                    error: true
+                }))
+
+    }
+
     componentDidMount() {
         this.getCharacters();
     }
-
 
     render() {
         const characters = this.state.characters.map(item => {
@@ -43,7 +69,11 @@ class Characters extends React.Component {
         return (<>
             {this.state.loading ? <Loading /> : null}
             {this.state.error ? <Error /> : null}
-            {!this.state.loading && !this.state.error ? <ViewCharacters characters={characters} /> : null}
+            {!this.state.loading && !this.state.error ? <ViewCharacters characters={characters}
+                newCharsPortion={this.state.newCharsPortion}
+                onLoadMoreBtn={this.onLoadMoreBtn}
+                offset={this.state.offset}
+            /> : null}
         </>
         )
     }
@@ -52,10 +82,15 @@ class Characters extends React.Component {
 
 class ViewCharacters extends React.Component {
     render() {
-        const { characters } = this.props;
+        const { characters, onLoadMoreBtn, newCharsPortion, offset } = this.props;
         return (
             <div className='characters' >
-                {characters}
+                <div className='characters__items'>
+                    {characters}
+                </div>
+                <button
+                    style={{ display: `${offset > 1553 ? 'none' : 'block'}` }}
+                    disabled={newCharsPortion} onClick={onLoadMoreBtn}>LOAD MORE</button>
             </div>
         )
     }

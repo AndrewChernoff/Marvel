@@ -1,8 +1,25 @@
 .characters {
-    display: grid;
-    grid-template-columns: 200px 200px 200px;
-    grid-template-rows: 318px 318px 318px;
-    grid-gap: 25px;
+    button {
+        display: block;
+        margin: 45px auto 0px auto;
+        width: 170px;
+        height: 38px;
+        background: #9F0013;
+        border: none;
+        color: white;
+        clip-path: polygon(15% -2%, 125% 0px, 85% 100%, -20% 100%)
+    }
+
+    button:disabled {
+        background: #914951;
+    }
+
+    &__items {
+        display: grid;
+        grid-template-columns: 200px 200px 200px;
+        grid-template-rows: 318px 318px 318px;
+        grid-gap: 25px;
+    }
 
     &__item {
         background: #232222;

@@ -11,8 +11,8 @@ class MarvelAPI {
         return await res.json();
     }
 
-    getAllCharcters = async () => {
-        return await this.getResourse(`${_baseURL}?${_apiKey}`);
+    getAllCharcters = async (offset = 500) => {
+        return await this.getResourse(`${_baseURL}?limit=9&offset=${offset}&apikey=34f1a3219ea2ae0e4d07e8edc8e23bf5`);
     }
 
     getCharacter = async (id) => {

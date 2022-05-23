@@ -11,7 +11,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      characters: [],
       selectedItem: null
     }
   }
@@ -19,10 +18,6 @@ class App extends React.Component {
     this.setState({
       selectedItem: item
     })
-  }
-
-  getCharacters = (chars) => {
-    this.setState({ characters: chars })
   }
 
   render() {
@@ -34,14 +29,14 @@ class App extends React.Component {
           <div className='container'>
             <div className='charactersBlock__content'>
               <ErrorBoundary>
-                <Characters getCharacters={this.getCharacters} getSelectedItem={this.getSelectedItem} />
+                <Characters getSelectedItem={this.getSelectedItem} />
               </ErrorBoundary>
               {!this.state.selectedItem ? <NotSelected /> :
                 <ErrorBoundary>
                   <CharacterItem selectedId={this.state.selectedItem} />
                 </ErrorBoundary>}
             </div>
-            <button>LOAD MORE</button>
+            {/* <button>LOAD MORE</button>*/}
           </div>
         </div>
       </>
