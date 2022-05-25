@@ -25,7 +25,27 @@
         background: #232222;
 
         img {
-            max-width: 200px;
+            max-width: 195px;
+            height: 190px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        &__name {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 15px 0 0 15px;
+            color: white;
+        }
+    }
+
+    &__item__active {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 20px rgb(159, 0, 19);
+        background: #232222;
+
+        img {
+            max-width: 195px;
             height: 190px;
             display: block;
             margin: 0 auto;

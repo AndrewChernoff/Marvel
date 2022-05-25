@@ -29,7 +29,7 @@ class App extends React.Component {
           <div className='container'>
             <div className='charactersBlock__content'>
               <ErrorBoundary>
-                <Characters getSelectedItem={this.getSelectedItem} />
+                <Characters getSelectedItem={this.getSelectedItem} selectedId={this.state.selectedItem} />
               </ErrorBoundary>
               {!this.state.selectedItem ? <NotSelected /> :
                 <ErrorBoundary>

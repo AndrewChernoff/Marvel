@@ -37,8 +37,6 @@ class Characters extends React.Component {
             offset: this.state.offset + 9
         })
 
-        console.log(this.state.offset)
-
         new MarvelAPI().getAllCharcters(this.state.offset)
             .then(res => {
                 this.setState({
@@ -52,16 +50,47 @@ class Characters extends React.Component {
                     loading: false,
                     error: true
                 }))
-
     }
+
+
 
     componentDidMount() {
         this.getCharacters();
     }
 
+    refItems = [];
+
+    setRef = (ref) => {
+        this.refItems.push(ref);
+    }
+
+    onFocus = (id) => {
+        this.refItems.forEach(item => item.classList.remove('characters__item__active'));
+        this.refItems.forEach(item => item.classList.add('characters__item'));
+        this.refItems[id].classList.add('characters__item__active');
+        this.refItems[id].focus();
+    }
+
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log(event.currentTarget);
+            this.onFocus(event.currentTarget.dataset.number);
+        }
+    }
+
     render() {
-        const characters = this.state.characters.map(item => {
-            return <div onClick={() => this.props.getSelectedItem(item.id)} className='characters__item' key={item.id}>
+        const characters = this.state.characters.map((item, i) => {
+
+            return <div tabIndex={0} data-number={i} ref={this.setRef} onClick={() => {
+                this.props.getSelectedItem(item.id);
+                this.onFocus(i);
+            }}
+                onKeyPress={(e) => {
+                    this.handleKeyPress(e)
+                    this.props.getSelectedItem(item.id);
+                }}
+
+                className={`${this.props.selectedId === item.id ? 'characters__item__active' : 'characters__item'}`} key={item.id}>
                 <img src={item.thumbnail.path + '.' + item.thumbnail.extension} alt={item.name} />
                 <div className='characters__item__name'>{item.name}</div>
             </div>
