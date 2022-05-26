@@ -106,7 +106,6 @@ class Characters extends React.Component {
         </>
         )
     }
-
 }
 
 class ViewCharacters extends React.Component {
