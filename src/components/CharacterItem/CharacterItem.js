@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MarvelAPI from "../../DAL/MarvelAPI/MarvelAPI";
 import '../CharacterItem/CharacterItem.scss';
 import ViewCharacterItem from "../Characters/ViewCharacterItem/ViewCharacterItem";
@@ -6,49 +6,46 @@ import Error from "../Common/Error/Error";
 import Loading from "../Common/Loading/Loading";
 import PropTypes from 'prop-types';
 
-class CharacterItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            character: {},
-            loading: true,
-            error: false
-        }
-    }
+const CharacterItem = (props) => {
 
-    getCharacter = () => {
-        this.setState({ loading: true });
-        new MarvelAPI().getCharacter(this.props.selectedId)
+    let [loading, setLoading] = useState(true);
+    let [error, setError] = useState(false);
+    let [character, setCharacter] = useState(null);
+
+    useEffect(() => {
+        getCharacter();
+    }, [props.selectedId]);
+
+    const getCharacter = () => {
+        setLoading(true);
+        new MarvelAPI().getCharacter(props.selectedId)
             .then((res) => {
-                this.setState({ character: res });
-                this.setState({ loading: false });
-            }).catch(() =>
-                this.setState({
-                    loading: false,
-                    error: true
-                }));
+                setCharacter(res);
+                setLoading(false);
+            }).catch(
+                () => {
+                    setError(true);
+                    setLoading(false);
+                })
     }
 
-    componentDidMount() {
-        this.getCharacter();
-    }
 
-    componentDidUpdate(prevProps) {
+
+    /* componentDidUpdate(prevProps) {
         if (this.props.selectedId !== prevProps.selectedId) {
             this.getCharacter();
         }
-    }
+    } */
 
 
-    render() {
-        return (<>
-            {this.state.loading ? <Loading /> : null}
-            {this.state.error ? <Error /> : null}
-            {!this.state.loading && !this.state.error ? <ViewCharacterItem state={this.state} /> : null}
-        </>
-        )
-    }
+    return (<>
+        {loading ? <Loading /> : null}
+        {error ? <Error /> : null}
+        {!loading && !error ? <ViewCharacterItem character={character} /> : null}
+    </>
+    )
 }
+
 
 CharacterItem.propTypes = {
     selectedId: PropTypes.number

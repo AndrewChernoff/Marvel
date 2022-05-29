@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import tools from '../../resourses/img/tools.png'
 import Error from '../Common/Error/Error';
@@ -7,65 +7,61 @@ import './RandomChar.scss';
 import WikiButton from '../Common/WikiButton/WikiButton';
 import HomePageBtn from '../Common/HomePageBtn/HomePageBtn';
 
-class RandomCharacter extends React.Component {
-    state = {
-        loading: true,
-        error: false
-    }
+const RandomCharacter = () => {
 
-    componentDidMount() {
-        this.getRandomChar();
-    }
+    let [loading, setLoading] = useState(true);
+    let [error, setError] = useState(false);
+    let [character, setCharacter] = useState(null);
 
-    getRandomChar = () => {
+    useEffect(() => {
+        getRandomChar();
+    }, []);
+
+    const getRandomChar = () => {
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
-        this.setState({ loading: true })
+        setLoading(true);
         new MarvelAPI().getCharacter(randomID)
             .then(character => {
-                this.setState({ character });
-                this.setState({ loading: false });
+                setCharacter(character);
+                setLoading(false);
             }).catch(
                 () => {
-                    this.setState({
-                        error: true,
-                        loading: false
-                    })
+                    setError(true);
+                    setLoading(false);
                 }
             )
     }
 
-    render() {
-        return (
-            <div className='random__character'>
-                <div className='container'>
-                    <div className='container__content'>
-                        <div className='random__character__content'>
-                            {this.state.loading ? <Loading /> : null}
-                            {!this.state.loading && !this.state.error ? <View state={this.state.character} /> : null}
-                            {this.state.error ? <Error /> : null}
-                        </div>
-                        <div className='random__info'>
-                            <div className='random__info__content'>
-                                <p> Random character for today!
-                                    <br></br>
-                                    Do you want to get to know him better?</p>
-                                <p>Or choose another one</p>
-                                <a onClick={this.getRandomChar} href='#' style={{
-                                    background: '#9F0013',
-                                }}>TRY IT</a>
-                                <img className='random__info__content__img' src={tools} alt='tool' />
-                            </div>
+    return (
+        <div className='random__character'>
+            <div className='container'>
+                <div className='container__content'>
+                    <div className='random__character__content'>
+                        {loading ? <Loading /> : null}
+                        {!loading && !error ? <View character={character} /> : null}
+                        {error ? <Error /> : null}
+                    </div>
+                    <div className='random__info'>
+                        <div className='random__info__content'>
+                            <p> Random character for today!
+                                <br></br>
+                                Do you want to get to know him better?</p>
+                            <p>Or choose another one</p>
+                            <a onClick={getRandomChar} href='#' style={{
+                                background: '#9F0013',
+                            }}>TRY IT</a>
+                            <img className='random__info__content__img' src={tools} alt='tool' />
                         </div>
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-const View = ({ state }) => {
+const View = ({ character }) => {
 
-    let { name, description, thumbnail, wiki } = state;
+    let { name, description, thumbnail, wiki } = character;
     try {
         if (description.length > 200) {
             let sliced = description.slice(0, 100) + '...';

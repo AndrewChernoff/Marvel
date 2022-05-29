@@ -61,10 +61,12 @@ const Characters = (props) => {
 
     const charactersArr = characters.map((item, i) => {
 
-        return <div tabIndex={0} data-number={i} ref={(element) => refItems.current[i] = element} onClick={() => {
-            props.getSelectedItem(item.id);
-            onFocus(i);
-        }}
+        return <div tabIndex={0} data-number={i}
+            ref={(element) => refItems.current[i] = element}
+            onClick={() => {
+                props.getSelectedItem(item.id);
+                onFocus(i);
+            }}
             onKeyPress={(e) => {
                 handleKeyPress(e)
                 props.getSelectedItem(item.id);
@@ -87,20 +89,17 @@ const Characters = (props) => {
     )
 }
 
-class ViewCharacters extends React.Component {
-    render() {
-        const { characters, onLoadMoreBtn, newCharsPortion, offset } = this.props;
-        return (
-            <div className='characters' >
-                <div className='characters__items'>
-                    {characters}
-                </div>
-                <button
-                    style={{ display: `${offset > 1553 ? 'none' : 'block'}` }}
-                    disabled={newCharsPortion} onClick={onLoadMoreBtn}>LOAD MORE</button>
+const ViewCharacters = ({ characters, onLoadMoreBtn, newCharsPortion, offset }) => {
+    return (
+        <div className='characters' >
+            <div className='characters__items'>
+                {characters}
             </div>
-        )
-    }
+            <button
+                style={{ display: `${offset > 1553 ? 'none' : 'block'}` }}
+                disabled={newCharsPortion} onClick={onLoadMoreBtn}>LOAD MORE</button>
+        </div>
+    )
 }
 
 export default Characters;
