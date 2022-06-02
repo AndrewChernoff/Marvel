@@ -5,38 +5,21 @@ import ViewCharacterItem from "../Characters/ViewCharacterItem/ViewCharacterItem
 import Error from "../Common/Error/Error";
 import Loading from "../Common/Loading/Loading";
 import PropTypes from 'prop-types';
+import useMarvelAPI from "../../DAL/MarvelAPI/MarvelAPI";
 
 const CharacterItem = (props) => {
 
-    let [loading, setLoading] = useState(true);
-    let [error, setError] = useState(false);
-    let [character, setCharacter] = useState(null);
+    let [character, setCharacter] = useState({});
+    let { getCharacter, error, loading } = useMarvelAPI();
+
 
     useEffect(() => {
-        getCharacter();
+        console.log('hey')
+        getCharacter(props.selectedId)
+            .then(character => {
+                setCharacter(character);
+            })
     }, [props.selectedId]);
-
-    const getCharacter = () => {
-        setLoading(true);
-        new MarvelAPI().getCharacter(props.selectedId)
-            .then((res) => {
-                setCharacter(res);
-                setLoading(false);
-            }).catch(
-                () => {
-                    setError(true);
-                    setLoading(false);
-                })
-    }
-
-
-
-    /* componentDidUpdate(prevProps) {
-        if (this.props.selectedId !== prevProps.selectedId) {
-            this.getCharacter();
-        }
-    } */
-
 
     return (<>
         {loading ? <Loading /> : null}

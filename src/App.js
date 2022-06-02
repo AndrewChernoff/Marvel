@@ -12,6 +12,7 @@ const App = () => {
 
   const getSelectedItem = (item) => {
     setSelectedItem(item);
+    console.log(selectedItem)
   }
 
   return (

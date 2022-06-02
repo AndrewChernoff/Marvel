@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import MarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import tools from '../../resourses/img/tools.png'
 import Error from '../Common/Error/Error';
 import Loading from '../Common/Loading/Loading';
 import './RandomChar.scss';
 import WikiButton from '../Common/WikiButton/WikiButton';
 import HomePageBtn from '../Common/HomePageBtn/HomePageBtn';
+import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 
 const RandomCharacter = () => {
-
-    let [loading, setLoading] = useState(true);
-    let [error, setError] = useState(false);
-    let [character, setCharacter] = useState(null);
+    let [character, setCharacter] = useState({});
+    let { loading, error, getCharacter } = useMarvelAPI();
 
     useEffect(() => {
         getRandomChar();
@@ -19,17 +17,10 @@ const RandomCharacter = () => {
 
     const getRandomChar = () => {
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
-        setLoading(true);
-        new MarvelAPI().getCharacter(randomID)
+        getCharacter(randomID)
             .then(character => {
                 setCharacter(character);
-                setLoading(false);
-            }).catch(
-                () => {
-                    setError(true);
-                    setLoading(false);
-                }
-            )
+            })
     }
 
     return (

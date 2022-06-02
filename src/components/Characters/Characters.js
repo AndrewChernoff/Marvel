@@ -1,29 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../Characters/Characters.scss';
-import MarvelAPI from "../../DAL/MarvelAPI/MarvelAPI";
 import Loading from "../Common/Loading/Loading";
 import Error from "../Common/Error/Error";
+import useMarvelAPI from "../../DAL/MarvelAPI/MarvelAPI";
 
 const Characters = (props) => {
     let [characters, setCharacters] = useState([]);
-    let [loading, setLoading] = useState(true);
-    let [error, setError] = useState(false);
     let [offset, setOffset] = useState(509);
     let [newCharsPortion, setNewCharsPortion] = useState(false);
+    let { getAllCharcters, error, loading } = useMarvelAPI();
 
     useEffect(() => {
         getCharacters();
     }, []);
 
     const getCharacters = () => {
-        setLoading(true);
-        new MarvelAPI().getAllCharcters()
+        getAllCharcters()
             .then(res => {
                 setCharacters(characters => [...characters, ...res.data.results]);
-                setLoading(false);
-            }).catch(() => {
-                setLoading(false);
-                setError(true);
             })
     }
 
@@ -31,15 +25,10 @@ const Characters = (props) => {
         setNewCharsPortion(true);
         setOffset(offset + 9);
 
-        new MarvelAPI().getAllCharcters(offset)
+        getAllCharcters(offset)
             .then(res => {
-                setLoading(false);
                 setCharacters(characters => [...characters, ...res.data.results])
                 setNewCharsPortion(false);
-            })
-            .catch(() => {
-                setLoading(false);
-                setError(true);
             })
     }
 
@@ -54,7 +43,6 @@ const Characters = (props) => {
 
     let handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            console.log(event.currentTarget);
             onFocus(event.currentTarget.dataset.number);
         }
     }
