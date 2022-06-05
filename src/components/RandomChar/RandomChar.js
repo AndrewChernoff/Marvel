@@ -9,13 +9,14 @@ import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 
 const RandomCharacter = () => {
     let [character, setCharacter] = useState({});
-    let { loading, error, getCharacter } = useMarvelAPI();
+    let { loading, error, getCharacter, clearError } = useMarvelAPI();
 
     useEffect(() => {
         getRandomChar();
     }, []);
 
     const getRandomChar = () => {
+        clearError();
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
         getCharacter(randomID)
             .then(character => {

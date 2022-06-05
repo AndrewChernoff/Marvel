@@ -15,6 +15,8 @@ const Characters = (props) => {
     }, []);
 
     const getCharacters = () => {
+        setNewCharsPortion(false);
+
         getAllCharcters()
             .then(res => {
                 setCharacters(characters => [...characters, ...res.data.results]);
@@ -66,13 +68,13 @@ const Characters = (props) => {
         </div>
     })
     return (<>
-        {loading ? <Loading /> : null}
+        {loading && !newCharsPortion ? <Loading /> : null}
         {error ? <Error /> : null}
-        {!loading && !error ? <ViewCharacters characters={charactersArr}
+        <ViewCharacters characters={charactersArr}
             newCharsPortion={newCharsPortion}
             onLoadMoreBtn={onLoadMoreBtn}
             offset={offset}
-        /> : null}
+        />
     </>
     )
 }
