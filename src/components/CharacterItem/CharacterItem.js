@@ -13,7 +13,6 @@ const CharacterItem = ({ selectedId }) => {
 
 
     useEffect(() => {
-        console.log('did mount')
         if (selectedId) {
             getCharacter(selectedId)
                 .then(character => {

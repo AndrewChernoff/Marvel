@@ -1,3 +1,5 @@
+@import '../../styleVariables/styleVariables.scss';
+
 .header {
     h2 {
         font-weight: 700;
@@ -10,10 +12,15 @@
         align-items: center;
         font-weight: 700;
         font-size: 24px;
+        max-width: 1160px;
 
         a {
             text-decoration: none;
             color: black;
+        }
+
+        .active {
+            color: $base-color;
         }
     }
 }

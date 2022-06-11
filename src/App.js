@@ -1,11 +1,9 @@
 import './App.scss';
-import Characters from './components/Characters/Characters';
 import Header from './components/Header/Header';
-import RandomCharacter from './components/RandomChar/RandomChar';
-import CharacterItem from './components/CharacterItem/CharacterItem';
 import React, { useState } from 'react';
-import NotSelected from './components/NotSelected/NotSelected';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary ';
+import { Route, Routes } from 'react-router-dom';
+import Comics from './components/Comics/Comics';
+import CharactersBlock from './components/CharactersBlock/CharactersBlock';
 
 const App = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -17,20 +15,17 @@ const App = () => {
   return (
     <>
       <Header />
-      <RandomCharacter />
-      <div className='charactersBlock'>
-        <div className='container'>
-          <div className='charactersBlock__content'>
-            <ErrorBoundary>
-              <Characters getSelectedItem={getSelectedItem} selectedId={selectedItem} />
-            </ErrorBoundary>
-            {!selectedItem ? <NotSelected /> :
-              <ErrorBoundary>
-                <CharacterItem selectedId={selectedItem} />
-              </ErrorBoundary>}
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route
+          path=""
+          element={<CharactersBlock selectedId={selectedItem} getSelectedItem={getSelectedItem} />
+          }
+        />
+        <Route
+          path="comics"
+          element={<Comics />}
+        />
+      </Routes>
     </>
   )
 

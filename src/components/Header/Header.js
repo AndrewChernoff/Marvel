@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import '../Header/Header.scss';
 
 const Header = () => {
@@ -8,7 +9,9 @@ const Header = () => {
                 <div className='header__content'>
                     <h2><span style={{ color: '#9F0013' }}>Marvel</span> information portal</h2>
                     <div className='header__links'>
-                        <a href='#'>Characters</a> / <a href='#'>Comics</a>
+                        <NavLink to="/"
+                        >Characters</NavLink> / <NavLink to="comics"
+                        >Comics</NavLink>
                     </div>
                 </div>
             </div>
