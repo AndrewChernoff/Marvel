@@ -1,7 +1,7 @@
 import '../Comics/Comics.scss';
 import avengersLogo from '../../resourses/logo/avengers_logo.png';
 import avengers from '../../resourses/img/avengers.png';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import Loading from '../Common/Loading/Loading';
 import Error from '../Common/Error/Error';
@@ -47,16 +47,7 @@ const Comics = () => {
 
     return <div className='comics'>
         <div className='container'>
-            <div className='comics__header'>
-                <img className='comics__header_avengers' src={avengers} alt='avengers' />
-                <div className='comics__header_title'>
-                    New comics every week!
-                    <br></br>
-                    Stay tuned!
-                </div>
-                <img className='comics__header_avengers-logo' src={avengersLogo} alt='avengers logo' />
-            </div>
-
+            <ComicsHeader />
             <div className='comics__items'>
                 {loading && !newPortion ? <Loading /> : null}
                 {error ? <Error /> : null}
@@ -65,8 +56,18 @@ const Comics = () => {
 
             <button style={{ display: `${comicsItems.length < 8 ? 'none' : 'block'}` }} disabled={newPortion} onClick={onLoadMoreClick}>LOAD MORE</button>
         </div>
+    </div>
+}
 
-
+export const ComicsHeader = () => {
+    return <div className='comics__header'>
+        <img className='comics__header_avengers' src={avengers} alt='avengers' />
+        <div className='comics__header_title'>
+            New comics every week!
+            <br></br>
+            Stay tuned!
+        </div>
+        <img className='comics__header_avengers-logo' src={avengersLogo} alt='avengers logo' />
     </div>
 }
 

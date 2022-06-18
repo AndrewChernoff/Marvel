@@ -45,7 +45,9 @@ const useMarvelAPI = () => {
             title: response.data.results[0].title,
             description: response.data.results[0].description,
             price: response.data.results[0].prices[0].price,
+            pageCount: response.data.results[0].pageCount,
             thumbnail: response.data.results[0].thumbnail.path + '.' + response.data.results[0].thumbnail.extension,
+            language: response.data.results[0].textObjects[0].language
         }
     }
 

@@ -1,0 +1,50 @@
+@mixin infoStyle {
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 25px;
+}
+
+.comicsItem {
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0 0 0;
+
+        a {
+            width: 80px;
+            height: 22px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            color: black;
+        }
+
+        &_img {
+            max-width: 293px;
+            height: 450px;
+        }
+
+        &_info {
+            max-width: 550px;
+
+            &_descr {
+                @include infoStyle
+            }
+
+            &_pageCount {
+                @include infoStyle
+            }
+
+            &_language {
+                @include infoStyle
+            }
+
+            &_price {
+                margin-top: 25px;
+                font-weight: 700;
+                font-size: 24px;
+                color: #9F0013;
+            }
+        }
+    }
+}
