@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import Loading from '../Common/Loading/Loading';
 import Error from '../Common/Error/Error';
+import { NavLink } from 'react-router-dom';
 
 const Comics = () => {
     let [comicsItems, setComicsItems] = useState([]);
@@ -15,7 +16,6 @@ const Comics = () => {
     useEffect(() => {
         getAllComics()
             .then(res => {
-                console.log(res.data.results)
                 setComicsItems(comicsItems => [...comicsItems, ...res.data.results])
             });
     }, []);
@@ -32,7 +32,8 @@ const Comics = () => {
     }
 
     const comicsList = comicsItems.map((item, i) => {
-        return <div className='comics__item' key={i}>
+        const path = `/comics/${item.id}`;
+        return <NavLink to={path} className='comics__item' key={i}>
             <img className='comics__item_img' src={item.thumbnail.path + '.' + item.thumbnail.extension} alt={item.title} />
             <div className='comics__item_title'>
                 {item.title}
@@ -40,7 +41,7 @@ const Comics = () => {
             <div className='comics__item_price'>
                 {item.prices[0].price}$
             </div>
-        </div>
+        </NavLink>
     })
 
 

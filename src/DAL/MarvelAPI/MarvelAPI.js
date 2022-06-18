@@ -22,6 +22,11 @@ const useMarvelAPI = () => {
         return res;
     }
 
+    const getComicsItem = async (id) => {
+        let res = await request(`https://gateway.marvel.com:443/v1/public/comics/${id}?apikey=34f1a3219ea2ae0e4d07e8edc8e23bf5`);
+        return _transformComicsItemObj(res);
+    }
+
     const _transformData = (response) => {
         return {
             id: response.data.results[0].id,
@@ -34,7 +39,17 @@ const useMarvelAPI = () => {
         }
     }
 
-    return { getAllCharcters, getCharacter, getAllComics, error, loading, clearError };
+    const _transformComicsItemObj = (response) => {
+        return {
+            id: response.data.results[0].id,
+            title: response.data.results[0].title,
+            description: response.data.results[0].description,
+            price: response.data.results[0].prices[0].price,
+            thumbnail: response.data.results[0].thumbnail.path + '.' + response.data.results[0].thumbnail.extension,
+        }
+    }
+
+    return { getAllCharcters, getCharacter, getAllComics, getComicsItem, error, loading, clearError };
 }
 
 export default useMarvelAPI;
