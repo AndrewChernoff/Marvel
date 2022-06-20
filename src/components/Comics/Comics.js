@@ -1,22 +1,23 @@
 import '../Comics/Comics.scss';
 import avengersLogo from '../../resourses/logo/avengers_logo.png';
 import avengers from '../../resourses/img/avengers.png';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import Loading from '../Common/Loading/Loading';
 import Error from '../Common/Error/Error';
 import { NavLink } from 'react-router-dom';
 
 const Comics = () => {
-    let [comicsItems, setComicsItems] = useState([]);
-    let [offset, setOffset] = useState(10008);
-    let [newPortion, setNewPortion] = useState(false);
-    let { getAllComics, error, loading } = useMarvelAPI();
+    const [comicsItems, setComicsItems] = useState([]);
+    const [offset, setOffset] = useState(10008);
+    const [newPortion, setNewPortion] = useState(false);
+    const { getAllComics, error, loading } = useMarvelAPI();
+    const comicsRef = useRef([]);
 
     useEffect(() => {
         getAllComics()
             .then(res => {
-                setComicsItems(comicsItems => [...comicsItems, ...res.data.results])
+                setComicsItems(comicsItems => [...comicsItems, ...res.data.results]);
             });
     }, []);
 
@@ -25,15 +26,26 @@ const Comics = () => {
         setOffset(offset + 8);
         getAllComics(offset)
             .then(res => {
-                console.log(res.data.results)
                 setComicsItems(comicsItems => [...comicsItems, ...res.data.results])
                 setNewPortion(false);
             });
     }
 
+    console.log(comicsRef)
+
+    const onEnterItem = (i) => {
+        comicsRef.current[i].focus();
+    }
+
+    const onLeaveItem = (i) => {
+        comicsRef.current[i].blur();
+    }
+
     const comicsList = comicsItems.map((item, i) => {
         const path = `/comics/${item.id}`;
-        return <NavLink to={path} className='comics__item' key={i}>
+
+        return <NavLink to={path} ref={(element) => comicsRef.current.push(element)} onMouseEnter={() => onEnterItem(i)}
+            onMouseLeave={() => onLeaveItem(i)} className='comics__item' key={i}>
             <img className='comics__item_img' src={item.thumbnail.path + '.' + item.thumbnail.extension} alt={item.title} />
             <div className='comics__item_title'>
                 {item.title}
