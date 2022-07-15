@@ -1,0 +1,51 @@
+@import '../../styleVariables/styleVariables.scss';
+
+form {
+    padding: 25px;
+    width: 425px;
+    min-height: 127px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    grid-area: 'form';
+
+    .formBlock {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    h2 {
+        font-weight: 700;
+        font-size: 18px;
+        color: #000000;
+    }
+
+    input {
+        border: none;
+        width: 250px;
+        height: 38px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        width: 101px;
+        height: 38px;
+        color: #FFFFFF;
+        background-color: $base-color;
+        border: none;
+        clip-path: polygon(20% -2%, 125% 0px, 80% 100%, -20% 100%);
+    }
+
+    .error {
+        margin-top: 25px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21px;
+        color: $base-color;
+    }
+}

@@ -27,6 +27,11 @@ const useMarvelAPI = () => {
         return _transformComicsItemObj(res);
     }
 
+    const getCharacterByName = async (name) => {
+        let res = await request(`https://gateway.marvel.com:443/v1/public/characters?name=${name}&apikey=34f1a3219ea2ae0e4d07e8edc8e23bf5`);
+        return res.data.results;/////////////
+    }
+
     const _transformData = (response) => {
         return {
             id: response.data.results[0].id,
@@ -51,7 +56,7 @@ const useMarvelAPI = () => {
         }
     }
 
-    return { getAllCharcters, getCharacter, getAllComics, getComicsItem, error, loading, clearError };
+    return { getAllCharcters, getCharacter, getAllComics, getComicsItem, getCharacterByName, error, loading, clearError };
 }
 
 export default useMarvelAPI;

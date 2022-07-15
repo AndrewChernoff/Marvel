@@ -36,6 +36,12 @@
         color: #000000;
         text-decoration: none;
 
+        &__active {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 20px rgb(159, 0, 19);
+            //background: #232222;
+        }
+
         &_img {
             max-width: 225px;
             height: 346px;
@@ -66,5 +72,15 @@
 
     button:disabled {
         background: #914951;
+    }
+}
+
+.charcter {
+
+    //////////////
+    &__item__active {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 20px rgb(159, 0, 19);
+        //background: #232222;
     }
 }

@@ -11,7 +11,6 @@ const CharacterItem = ({ selectedId }) => {
     let [character, setCharacter] = useState(null);
     let { getCharacter, error, loading } = useMarvelAPI();
 
-
     useEffect(() => {
         if (selectedId) {
             getCharacter(selectedId)

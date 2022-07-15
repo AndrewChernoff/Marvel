@@ -1,9 +1,7 @@
 .random__character {
-
     .container__content {
         display: flex;
     }
-
 
     &__content {
         display: flex;
@@ -47,11 +45,9 @@
             width: 260px;
 
             p {
-                //////!!!!!!!!!!
                 min-height: 90px;
                 width: 265px;
             }
-
 
             &__btns {
                 display: flex;
@@ -77,6 +73,10 @@
         font-size: 24px;
         font-weight: 700;
         position: relative;
+
+        p:nth-child(2) {
+            margin: 33px 0 24px 0;
+        }
 
         a {
             display: flex;

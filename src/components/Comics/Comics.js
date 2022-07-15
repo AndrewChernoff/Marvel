@@ -6,12 +6,13 @@ import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 import Loading from '../Common/Loading/Loading';
 import Error from '../Common/Error/Error';
 import { NavLink } from 'react-router-dom';
+import AnimatePage from '../Common/AnimatePage/AnimatePage';
 
 const Comics = () => {
     const [comicsItems, setComicsItems] = useState([]);
     const [offset, setOffset] = useState(10008);
     const [newPortion, setNewPortion] = useState(false);
-    const { getAllComics, error, loading } = useMarvelAPI();
+    const { getAllComics, error, loading, getCharacterByName } = useMarvelAPI();
     const comicsRef = useRef([]);
 
     useEffect(() => {
@@ -19,6 +20,7 @@ const Comics = () => {
             .then(res => {
                 setComicsItems(comicsItems => [...comicsItems, ...res.data.results]);
             });
+        //getCharacterByName('Hammerhead').then(res => console.log(res))
     }, []);
 
     const onLoadMoreClick = () => {
@@ -31,14 +33,18 @@ const Comics = () => {
             });
     }
 
-    console.log(comicsRef)
-
     const onEnterItem = (i) => {
+        comicsRef.current.forEach(el => el.classList.remove('comics__item__active'));
+        comicsRef.current[i].classList.add('comics__item__active');
         comicsRef.current[i].focus();
     }
 
     const onLeaveItem = (i) => {
+
         comicsRef.current[i].blur();
+        comicsRef.current[i].classList.add('comics__item__active');
+        comicsRef.current.forEach(el => el.classList.remove('comics__item__active'));
+
     }
 
     const comicsList = comicsItems.map((item, i) => {
@@ -57,18 +63,20 @@ const Comics = () => {
     })
 
 
-    return <div className='comics'>
-        <div className='container'>
-            <ComicsHeader />
-            <div className='comics__items'>
-                {loading && !newPortion ? <Loading /> : null}
-                {error ? <Error /> : null}
-                {comicsList}
-            </div>
+    return <AnimatePage>
+        <div className='comics'>
+            <div className='container'>
+                <ComicsHeader />
+                <div className='comics__items'>
+                    {loading && !newPortion ? <Loading /> : null}
+                    {error ? <Error /> : null}
+                    {comicsList}
+                </div>
 
-            <button style={{ display: `${comicsItems.length < 8 ? 'none' : 'block'}` }} disabled={newPortion} onClick={onLoadMoreClick}>LOAD MORE</button>
+                <button style={{ display: `${comicsItems.length < 8 ? 'none' : 'block'}` }} disabled={newPortion} onClick={onLoadMoreClick}>LOAD MORE</button>
+            </div>
         </div>
-    </div>
+    </AnimatePage>
 }
 
 export const ComicsHeader = () => {

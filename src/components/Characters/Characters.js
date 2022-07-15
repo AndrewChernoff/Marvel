@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import '../Characters/Characters.scss';
 import Loading from "../Common/Loading/Loading";
 import Error from "../Common/Error/Error";
@@ -14,14 +14,17 @@ const Characters = (props) => {
         getCharacters();
     }, []);
 
-    const getCharacters = () => {
-        setNewCharsPortion(false);
+    const getCharacters = useCallback(
+        () => {
+            setNewCharsPortion(false);
 
-        getAllCharcters()
-            .then(res => {
-                setCharacters(characters => [...characters, ...res.data.results]);
-            })
-    }
+            getAllCharcters()
+                .then(res => {
+                    setCharacters(characters => [...characters, ...res.data.results]);
+                })
+        },
+        [],
+    );
 
     const onLoadMoreBtn = () => {
         setNewCharsPortion(true);
