@@ -8,6 +8,7 @@ import AnimatePage from './components/Common/AnimatePage/AnimatePage';
 const Comics = lazy(() => import('./components/Comics/Comics'));
 const CharactersBlock = lazy(() => import('./components/CharactersBlock/CharactersBlock'));
 const ComicsItem = lazy(() => import('./components/Comics/ComicsItem/ComicsItem'));
+const FormCharacter = lazy(() => import('./components/FormCharacter/FormCharacter'));
 
 const App = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -41,6 +42,15 @@ const App = () => {
           element={
             <Suspense fallback={<>Loading...</>}>
               <ComicsItem />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="formCharacter"
+          element={
+            <Suspense fallback={<>Loading...</>}>
+              <FormCharacter />
             </Suspense>
           }
         />

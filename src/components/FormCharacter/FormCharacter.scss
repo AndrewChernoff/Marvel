@@ -1,0 +1,15 @@
+.formCharacter {
+    display: grid;
+    grid-template-columns: 293px 550px;
+    grid-gap: 50px;
+    margin: 50px 0 0 0;
+
+    img {
+        max-width: 293px;
+        max-height: 293px;
+    }
+
+    &__descr {
+        margin-top: 25px;
+    }
+}

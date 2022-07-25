@@ -20,7 +20,6 @@ const Comics = () => {
             .then(res => {
                 setComicsItems(comicsItems => [...comicsItems, ...res.data.results]);
             });
-        //getCharacterByName('Hammerhead').then(res => console.log(res))
     }, []);
 
     const onLoadMoreClick = () => {
