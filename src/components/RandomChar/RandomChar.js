@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import tools from '../../resourses/img/tools.png'
 import Error from '../Common/Error/Error';
 import Loading from '../Common/Loading/Loading';
+import componentContent from '../../utils/utils';
 import './RandomChar.scss';
 import WikiButton from '../Common/WikiButton/WikiButton';
 import HomePageBtn from '../Common/HomePageBtn/HomePageBtn';
@@ -9,7 +10,7 @@ import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 
 const RandomCharacter = () => {
     let [character, setCharacter] = useState({});
-    let { loading, error, getCharacter, clearError } = useMarvelAPI();
+    let { loading, error, getCharacter, clearError, process, setProcess} = useMarvelAPI();
 
     useEffect(() => {
         getRandomChar();
@@ -17,11 +18,13 @@ const RandomCharacter = () => {
 
     const getRandomChar = () => {
         clearError();
+        setProcess('waiting');
         const randomID = Math.floor(Math.random() * (1011400 - 1011000 + 1)) + 1011000;
         getCharacter(randomID)
             .then(character => {
                 setCharacter(character);
             })
+            .then(() => setProcess('loaded'))
     }
 
     return (
@@ -29,9 +32,7 @@ const RandomCharacter = () => {
             <div className='container'>
                 <div className='container__content'>
                     <div className='random__character__content'>
-                        {loading ? <Loading /> : null}
-                        {!loading && !error ? <View character={character} /> : null}
-                        {error ? <Error /> : null}
+                        {componentContent(process, <View character={character} />)}
                     </div>
                     <div className='random__info'>
                         <div className='random__info__content'>

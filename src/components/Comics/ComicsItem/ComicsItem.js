@@ -32,7 +32,7 @@ const ComicsItem = () => {
                         <h2 className='comicsItem__content_info_name'>{item.title}</h2>
                         {item.description ?
                             parse(`<div className='comicsItem__content_info_descr'>${item.description}</div>`)
-                            : 'No info for this comics'
+                            : 'No info for this comic'
                         }
                         {item.pageCount ?
                             <div className='comicsItem__content_info_pageCount'>{item.pageCount} pages</div>

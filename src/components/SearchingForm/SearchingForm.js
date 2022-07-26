@@ -18,8 +18,6 @@ const SearchingForm = () => {
         setCharacter(null);
         getCharacterByName(values.name).then((res) => {
           setCharacter(res);
-          console.log(res)
-
         });
         resetForm();
       }}

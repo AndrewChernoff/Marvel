@@ -3,6 +3,7 @@ import avengersLogo from '../../resourses/logo/avengers_logo.png';
 import avengers from '../../resourses/img/avengers.png';
 import { useEffect, useRef, useState } from 'react';
 import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
+import componentContent from '../../utils/utils';
 import Loading from '../Common/Loading/Loading';
 import Error from '../Common/Error/Error';
 import { NavLink } from 'react-router-dom';
@@ -12,14 +13,17 @@ const Comics = () => {
     const [comicsItems, setComicsItems] = useState([]);
     const [offset, setOffset] = useState(10008);
     const [newPortion, setNewPortion] = useState(false);
-    const { getAllComics, error, loading, getCharacterByName } = useMarvelAPI();
+    const { getAllComics, process, setProcess } = useMarvelAPI();
     const comicsRef = useRef([]);
 
     useEffect(() => {
+        setProcess("waiting");
+
         getAllComics()
             .then(res => {
                 setComicsItems(comicsItems => [...comicsItems, ...res.data.results]);
-            });
+            })
+            .then(() => setProcess("loaded"));
     }, []);
 
     const onLoadMoreClick = () => {
@@ -39,11 +43,9 @@ const Comics = () => {
     }
 
     const onLeaveItem = (i) => {
-
-        comicsRef.current[i].blur();
-        comicsRef.current[i].classList.add('comics__item__active');
         comicsRef.current.forEach(el => el.classList.remove('comics__item__active'));
-
+        comicsRef.current[i].classList.add('comics__item__active');
+        comicsRef.current[i].blur();
     }
 
     const comicsList = comicsItems.map((item, i) => {
@@ -66,16 +68,17 @@ const Comics = () => {
         <div className='comics'>
             <div className='container'>
                 <ComicsHeader />
-                <div className='comics__items'>
-                    {loading && !newPortion ? <Loading /> : null}
-                    {error ? <Error /> : null}
-                    {comicsList}
-                </div>
-
+                {componentContent(process, <ViewComics comicsList={comicsList}/>)}
                 <button style={{ display: `${comicsItems.length < 8 ? 'none' : 'block'}` }} disabled={newPortion} onClick={onLoadMoreClick}>LOAD MORE</button>
             </div>
         </div>
     </AnimatePage>
+}
+
+const ViewComics = ({comicsList}) => {
+    return <div className='comics__items'>
+    {comicsList} 
+</div>
 }
 
 export const ComicsHeader = () => {
