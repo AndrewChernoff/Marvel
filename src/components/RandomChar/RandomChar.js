@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import tools from '../../resourses/img/tools.png'
-import Error from '../Common/Error/Error';
-import Loading from '../Common/Loading/Loading';
+import tools from '../../resourses/img/tools.png';
 import componentContent from '../../utils/utils';
 import './RandomChar.scss';
 import WikiButton from '../Common/WikiButton/WikiButton';
@@ -10,7 +8,7 @@ import useMarvelAPI from '../../DAL/MarvelAPI/MarvelAPI';
 
 const RandomCharacter = () => {
     let [character, setCharacter] = useState({});
-    let { loading, error, getCharacter, clearError, process, setProcess} = useMarvelAPI();
+    let { getCharacter, clearError, process, setProcess} = useMarvelAPI();
 
     useEffect(() => {
         getRandomChar();
