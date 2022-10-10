@@ -14,8 +14,6 @@ const RandomCharacter = () => {
         getRandomChar();
     }, []);
 
-    console.log(process)
-
     const getRandomChar = () => {
         clearError();
         setProcess('waiting');
