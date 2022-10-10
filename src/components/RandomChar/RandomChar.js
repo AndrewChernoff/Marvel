@@ -14,6 +14,8 @@ const RandomCharacter = () => {
         getRandomChar();
     }, []);
 
+    console.log(process)
+
     const getRandomChar = () => {
         clearError();
         setProcess('waiting');
@@ -38,9 +40,7 @@ const RandomCharacter = () => {
                                 <br></br>
                                 Do you want to get to know him better?</p>
                             <p>Or choose another one</p>
-                            <a onClick={getRandomChar} href='#' style={{
-                                background: '#9F0013',
-                            }}>TRY IT</a>
+                            <button onClick={getRandomChar} disabled={process === 'waiting' ? true : false}>TRY IT</button>
                             <img className='random__info__content__img' src={tools} alt='tool' />
                         </div>
                     </div>

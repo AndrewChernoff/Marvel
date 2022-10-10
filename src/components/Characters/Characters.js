@@ -81,39 +81,8 @@ const Characters = (props) => {
     );
   });
 
-  /* const componentContent = (processName, array) => {
-    switch (processName) {
-      case "waiting":
-        return <Loading />;
-        break;
-      case "loaded":
-        return (
-          <ViewCharacters
-            characters={array}
-            newCharsPortion={newCharsPortion}
-            onLoadMoreBtn={onLoadMoreBtn}
-            offset={offset}
-          />
-        );
-        break;
-        case 'error':
-            return <Error />
-        break;
-        default:
-            return <Error/>
-    }
-  }; */
-
   return (
     <>
-      {/* {loading && !newCharsPortion ? <Loading /> : null}
-      {error ? <Error /> : null}
-      <ViewCharacters
-        characters={charactersArr}
-        newCharsPortion={newCharsPortion}
-        onLoadMoreBtn={onLoadMoreBtn}
-        offset={offset}
-      /> */}
       {componentContent(process, <ViewCharacters
             characters={charactersArr}
             newCharsPortion={newCharsPortion}
