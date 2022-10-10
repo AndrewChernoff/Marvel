@@ -22,7 +22,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route
-          path=""
+          path="/"
           element={
             <Suspense fallback={<Loading />}>
               <CharactersBlock selectedId={selectedItem} getSelectedItem={getSelectedItem} />
