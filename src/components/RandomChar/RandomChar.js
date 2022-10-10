@@ -25,6 +25,7 @@ const RandomCharacter = () => {
             .then(() => setProcess('loaded'))
     }
 
+    
     return (
         <div className='random__character'>
             <div className='container'>
